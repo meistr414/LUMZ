@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" role="img" aria-label="Oversized Hoodie in Olive">
+  <rect width="600" height="750" fill="#556b2f" />
+  <rect x="150" y="110" width="300" height="420" rx="24" fill="#f5f1e8" fill-opacity="0.14" />
+  <text x="300" y="640" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#f5f1e8">Oversized Hoodie</text>
+  <text x="300" y="676" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#f5f1e8" fill-opacity="0.8">Olive</text>
+  <text x="300" y="706" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" letter-spacing="2" fill="#f5f1e8" fill-opacity="0.55">LUMZ PLACEHOLDER</text>
+</svg>

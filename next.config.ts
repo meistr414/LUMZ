@@ -20,6 +20,14 @@ const cspHeader = `
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  images: {
+    // Placeholder product photography is self-authored, locally generated
+    // SVGs (see /public/products) — safe to allow since nothing here comes
+    // from user input. Swap to raster photography before enabling remotePatterns.
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "inline",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
   async headers() {
     return [
       {
