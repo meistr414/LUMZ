@@ -1,24 +1,17 @@
-import { DELIVERY_CONFIG } from "@/lib/config/delivery";
+import { getDeliveryCents } from "@/lib/config/delivery";
 import { formatZAR } from "@/lib/format";
+import type { DeliveryMethod } from "@/types/checkout";
 
 type OrderSummaryProps = {
   subtotalCents: number;
-  deliveryMethod?: "standard" | "express" | "collect";
+  deliveryMethod?: DeliveryMethod;
 };
 
 export function OrderSummary({
   subtotalCents,
   deliveryMethod = "standard",
 }: OrderSummaryProps) {
-  const deliveryCents =
-    deliveryMethod === "collect"
-      ? 0
-      : subtotalCents >= DELIVERY_CONFIG.freeDeliveryThresholdCents
-        ? 0
-        : deliveryMethod === "express"
-          ? DELIVERY_CONFIG.expressCents
-          : DELIVERY_CONFIG.standardCents;
-
+  const deliveryCents = getDeliveryCents(deliveryMethod, subtotalCents);
   const totalCents = subtotalCents + deliveryCents;
 
   return (
