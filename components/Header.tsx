@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Menu, Search, ShoppingBag } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CartLink } from "@/components/CartLink";
 import {
   Sheet,
   SheetContent,
@@ -16,8 +17,6 @@ const NAV_LINKS = [
 ];
 
 export function Header() {
-  const cartCount = 0;
-
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-4">
@@ -81,23 +80,7 @@ export function Header() {
           >
             <Search aria-hidden="true" />
           </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label={`Cart, ${cartCount} items`}
-            nativeButton={false}
-            render={<Link href="/cart" />}
-          >
-            <span className="relative">
-              <ShoppingBag aria-hidden="true" />
-              <span
-                aria-live="polite"
-                className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand px-1 text-[10px] font-semibold leading-none text-brand-foreground"
-              >
-                {cartCount}
-              </span>
-            </span>
-          </Button>
+          <CartLink />
         </div>
       </div>
     </header>
