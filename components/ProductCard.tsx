@@ -11,9 +11,10 @@ import { PriceTag } from "@/components/PriceTag";
 
 type ProductCardProps = {
   product: Product;
+  priority?: boolean;
 };
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, priority = false }: ProductCardProps) {
   const primaryColour = product.colours[0];
   const [image1, image2] = primaryColour?.images ?? [];
   const soldOut = isProductSoldOut(product);
@@ -31,6 +32,7 @@ export function ProductCard({ product }: ProductCardProps) {
             src={image1.src}
             alt={image1.alt}
             fill
+            priority={priority}
             sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
             className={cn(
               "object-cover transition-opacity duration-200",
@@ -64,7 +66,7 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
 
       <div className="mt-3 flex flex-col gap-1">
-        <h3 className="text-sm font-medium">{product.name}</h3>
+        <h2 className="text-sm font-medium">{product.name}</h2>
         <PriceTag
           priceCents={getProductMinPriceCents(product)}
           compareAtCents={compareAtCents}

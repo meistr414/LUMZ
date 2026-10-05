@@ -210,7 +210,7 @@ export function CheckoutForm() {
         <div className="flex flex-col gap-1.5">
           <label htmlFor="notes" className="text-sm font-medium">
             Delivery notes{" "}
-            <span className="font-normal text-foreground/50">(optional)</span>
+            <span className="font-normal text-foreground/60">(optional)</span>
           </label>
           <textarea
             id="notes"

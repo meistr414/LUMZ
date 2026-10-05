@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProductDetail } from "@/components/ProductDetail";
+import { breadcrumbJsonLd } from "@/lib/breadcrumb-jsonld";
 import {
+  getCategories,
   getProductCompareAtCents,
   getProductMinPriceCents,
   getProduct,
@@ -50,6 +53,16 @@ export default async function ProductPage(
   const priceCents = getProductMinPriceCents(product);
   const compareAtCents = getProductCompareAtCents(product);
   const soldOut = isProductSoldOut(product);
+  const category = getCategories().find((c) => c.id === product.categoryId);
+
+  const breadcrumbItems = [
+    { name: "Home", path: "/" },
+    { name: "Shop all", path: "/products" },
+    ...(category
+      ? [{ name: category.name, path: `/products?category=${category.id}` }]
+      : []),
+    { name: product.name, path: `/products/${product.slug}` },
+  ];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -83,6 +96,29 @@ export default async function ProductPage(
       <script type="application/ld+json">
         {JSON.stringify(jsonLd).replace(/</g, "\\u003c")}
       </script>
+      <script type="application/ld+json">
+        {JSON.stringify(breadcrumbJsonLd(breadcrumbItems)).replace(
+          /</g,
+          "\\u003c"
+        )}
+      </script>
+      <div className="mx-auto max-w-6xl px-4 pt-4">
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Shop all", href: "/products" },
+            ...(category
+              ? [
+                  {
+                    label: category.name,
+                    href: `/products?category=${category.id}`,
+                  },
+                ]
+              : []),
+            { label: product.name },
+          ]}
+        />
+      </div>
       <ProductDetail product={product} sizeChart={sizeChart} />
     </>
   );

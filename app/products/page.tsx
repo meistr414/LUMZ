@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProductGridSkeleton } from "@/components/ProductGrid";
 import { ProductsBrowser } from "@/components/ProductsBrowser";
+import { breadcrumbJsonLd } from "@/lib/breadcrumb-jsonld";
 import {
   getAllColours,
   getAllSizes,
   getCategories,
   getProducts,
 } from "@/lib/data/products";
+
+const BREADCRUMB_ITEMS = [
+  { name: "Home", path: "/" },
+  { name: "Shop all", path: "/products" },
+];
 
 export const metadata: Metadata = {
   title: "Shop all",
@@ -23,6 +30,15 @@ export default function ProductsPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
+      <script type="application/ld+json">
+        {JSON.stringify(breadcrumbJsonLd(BREADCRUMB_ITEMS)).replace(
+          /</g,
+          "\\u003c"
+        )}
+      </script>
+      <Breadcrumbs
+        items={[{ label: "Home", href: "/" }, { label: "Shop all" }]}
+      />
       <h1 className="mb-6 text-2xl font-bold tracking-tight">Shop all</h1>
       <Suspense fallback={<ProductsBrowserFallback />}>
         <ProductsBrowser

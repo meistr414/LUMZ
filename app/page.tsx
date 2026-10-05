@@ -40,7 +40,7 @@ export default function Home() {
               {category.image && (
                 <Image
                   src={category.image}
-                  alt={category.name}
+                  alt=""
                   fill
                   sizes="(min-width: 640px) 25vw, 50vw"
                   className="object-cover transition-transform group-hover:scale-105"

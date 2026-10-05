@@ -70,7 +70,7 @@ export function ProductsBrowser({
       <p className="text-sm text-foreground/60" aria-live="polite">
         {filtered.length} {filtered.length === 1 ? "product" : "products"}
       </p>
-      <ProductGrid products={visible} />
+      <ProductGrid products={visible} priorityCount={2} />
       {hasMore && (
         <div className="flex justify-center pt-4">
           <Button

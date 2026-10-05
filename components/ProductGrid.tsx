@@ -4,9 +4,16 @@ import type { Product } from "@/types/product";
 type ProductGridProps = {
   products: Product[];
   emptyMessage?: string;
+  /** Marks the first N images `priority` — use for the grid that renders
+   * the page's above-the-fold LCP image (e.g. the catalogue grid). */
+  priorityCount?: number;
 };
 
-export function ProductGrid({ products, emptyMessage }: ProductGridProps) {
+export function ProductGrid({
+  products,
+  emptyMessage,
+  priorityCount = 0,
+}: ProductGridProps) {
   if (products.length === 0) {
     return (
       <div className="flex flex-col items-center gap-2 py-24 text-center">
@@ -20,8 +27,12 @@ export function ProductGrid({ products, emptyMessage }: ProductGridProps) {
 
   return (
     <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+      {products.map((product, i) => (
+        <ProductCard
+          key={product.id}
+          product={product}
+          priority={i < priorityCount}
+        />
       ))}
     </div>
   );

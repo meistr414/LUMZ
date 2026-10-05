@@ -35,7 +35,7 @@ export function AddressFields() {
       <div className="flex flex-col gap-1.5">
         <label htmlFor="line2" className="text-sm font-medium">
           Apartment, complex, unit{" "}
-          <span className="font-normal text-foreground/50">(optional)</span>
+          <span className="font-normal text-foreground/60">(optional)</span>
         </label>
         <Input
           id="line2"

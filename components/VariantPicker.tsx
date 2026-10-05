@@ -89,7 +89,7 @@ export function VariantPicker({
                   size === selectedSize &&
                     "border-foreground bg-foreground text-background",
                   soldOut &&
-                    "cursor-not-allowed text-foreground/40 line-through"
+                    "cursor-not-allowed text-foreground/60 line-through"
                 )}
               >
                 {size}

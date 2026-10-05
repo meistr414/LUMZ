@@ -16,11 +16,13 @@ export function PriceTag({
 
   return (
     <span className={cn("inline-flex items-baseline gap-2", className)}>
-      <span className={onSale ? "font-semibold text-brand" : "font-medium"}>
+      <span
+        className={onSale ? "font-semibold text-brand-text" : "font-medium"}
+      >
         {formatZAR(priceCents)}
       </span>
       {onSale && (
-        <span className="text-sm text-foreground/50 line-through">
+        <span className="text-sm text-foreground/60 line-through">
           {formatZAR(compareAtCents)}
         </span>
       )}
