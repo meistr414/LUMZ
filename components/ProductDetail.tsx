@@ -10,7 +10,6 @@ import { QuantityStepper } from "@/components/QuantityStepper";
 import { VariantPicker } from "@/components/VariantPicker";
 import { getProductMinPriceCents, isProductSoldOut } from "@/lib/data/products";
 import { useCartStore } from "@/lib/store/cart";
-import { useToastStore } from "@/lib/store/toast";
 import type { Product, SizeChart } from "@/types/product";
 
 type ProductDetailProps = {
@@ -27,7 +26,7 @@ export function ProductDetail({ product, sizeChart }: ProductDetailProps) {
   const [sizeError, setSizeError] = useState(false);
 
   const addItem = useCartStore((s) => s.addItem);
-  const showToast = useToastStore((s) => s.show);
+  const openDrawer = useCartStore((s) => s.openDrawer);
 
   const soldOut = isProductSoldOut(product);
   const selectedColour = product.colours.find((c) => c.id === selectedColourId);
@@ -57,9 +56,7 @@ export function ProductDetail({ product, sizeChart }: ProductDetailProps) {
       return;
     }
     addItem(product.id, selectedVariant.id, quantity);
-    showToast(
-      `Added ${product.name} (${selectedColour?.name}, ${selectedSize}) to cart`
-    );
+    openDrawer();
   }
 
   return (

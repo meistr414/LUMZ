@@ -1,6 +1,7 @@
 import { CATEGORIES } from "@/mocks/categories";
 import { PRODUCTS } from "@/mocks/products";
-import type { Category, Department, Product } from "@/types/product";
+import type { CartItem } from "@/types/cart";
+import type { Category, Department, Product, Variant } from "@/types/product";
 
 export function getProducts(): Product[] {
   return PRODUCTS.filter((product) => product.active);
@@ -8,6 +9,24 @@ export function getProducts(): Product[] {
 
 export function getProduct(slug: string): Product | undefined {
   return PRODUCTS.find((product) => product.slug === slug && product.active);
+}
+
+export function getProductById(productId: string): Product | undefined {
+  return PRODUCTS.find((product) => product.id === productId && product.active);
+}
+
+/**
+ * Re-derives a cart line's live product/variant from the catalogue — the
+ * cart only ever stores IDs and quantities, never prices.
+ */
+export function resolveCartItem(
+  item: CartItem
+): { product: Product; variant: Variant } | null {
+  const product = getProductById(item.productId);
+  if (!product) return null;
+  const variant = product.variants.find((v) => v.id === item.variantId);
+  if (!variant) return null;
+  return { product, variant };
 }
 
 export function getCategories(): Category[] {

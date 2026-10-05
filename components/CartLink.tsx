@@ -1,20 +1,19 @@
 "use client";
 
-import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useCartCount } from "@/lib/store/cart";
+import { useCartCount, useCartStore } from "@/lib/store/cart";
 
 export function CartLink() {
   const count = useCartCount();
+  const openDrawer = useCartStore((s) => s.openDrawer);
 
   return (
     <Button
       variant="ghost"
       size="icon"
       aria-label={`Cart, ${count} items`}
-      nativeButton={false}
-      render={<Link href="/cart" />}
+      onClick={openDrawer}
     >
       <span className="relative">
         <ShoppingBag aria-hidden="true" />
