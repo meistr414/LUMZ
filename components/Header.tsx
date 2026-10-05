@@ -76,6 +76,7 @@ export function Header() {
             variant="ghost"
             size="icon"
             aria-label="Search"
+            nativeButton={false}
             render={<Link href="/products" />}
           >
             <Search aria-hidden="true" />
@@ -84,6 +85,7 @@ export function Header() {
             variant="ghost"
             size="icon"
             aria-label={`Cart, ${cartCount} items`}
+            nativeButton={false}
             render={<Link href="/cart" />}
           >
             <span className="relative">
